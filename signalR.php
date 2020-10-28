@@ -2,22 +2,31 @@
 <script src="Scripts/jquery.signalr-2.2.0.js" type="text/javascript"></script>
 
 <script>
-
-    var connection      = $.hubConnection('Hub conection with /signal');                
-    var hubProxyConnection = connection.createHubProxy('Hub to connected functions'); 
+    var connection         = $.hubConnection('Hub conection with signalr');                
+    var hubProxyConnection = connection.createHubProxy('Connection hub with server roles'); 
 
     connection.logging = true;
-    connection.addHeaders('Headers Object');
+    
+//    Example:
+//        
+//    var headers = {
+//        Authorization: "Basic zApc2tvMA==",
+//        Cookie: "ss-opt=temp; X-UAId=0000; ss-pid=JjxQQUfd"
+//    };
+    
+    connection.addHeaders('headers'); // Inform the header according to the example above
     
     connection.stateChanged(function(state) 
     {
         console.log('STATE: ' + state.newState);
     });    
     
-    hubProxyConnection.on('Function Listened', function(data)
+    hubProxyConnection.on('Name of the role that you are listening for', function(data)
     {
         console.log(data); 
     }); 
+    
+    // After informing all functions, call the Start function
     
     connection.start({ transport: ['webSockets', 'longPolling'], withCredentials: true})
     .done(function()
