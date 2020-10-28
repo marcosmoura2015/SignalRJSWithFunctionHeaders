@@ -1,2 +1,2 @@
 # SignalRWithFunctionHeaders
-Creation of the "add Headers" function to include Headers in requests
+Creation of the "addHeaders" function to include Headers in requests
